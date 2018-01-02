@@ -46,4 +46,7 @@ contract TestRevertAssert {
     msg.sender.transfer(amount);
   }
 
+  function callSecondContract() payable {
+    _secondContract.call.gas(100000).value(msg.value)(msg.data);
+  }
 }
