@@ -3,11 +3,11 @@ pragma solidity ^0.4.13;
 contract someContract {
     
     mapping(address => uint) balances;
-    
+
     function deposit() payable {
         balances[msg.sender] += msg.value;
     }
-    
+
     //VERY very bad below
     function withdrawVeryBad1(uint amount) {
         if(balances[msg.sender] >= amount) {
@@ -28,7 +28,7 @@ contract someContract {
             }
         }
     }
-    
+
     function withdrawBad1(uint amount) {
         if(balances[msg.sender] >= amount) {
             if(msg.sender.send(amount)) {
@@ -36,7 +36,7 @@ contract someContract {
             }
         }
     }
-    
+
     function withdrawOkayish(uint amount) {
         if(balances[msg.sender] >= amount) {
             balances[msg.sender] -= amount;
@@ -53,17 +53,17 @@ contract someContract {
             }
         }
     }
-    
-    
+
+
     //OKAY FUNCTIONS
-    
+
     function withdrawOK(uint amount) {
         if(balances[msg.sender] >= amount) {
             balances[msg.sender] -= amount;
             msg.sender.transfer(amount);
         }
     }
-    
+
     //New Exception handling
     function withdrawGood(uint amount) {
         require(balances[msg.sender] >= amount);
