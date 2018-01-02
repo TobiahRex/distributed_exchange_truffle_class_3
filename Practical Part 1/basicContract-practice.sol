@@ -26,5 +26,7 @@ contract TestRevertAssert {
 
   mapping(address => uint) balance; // balance = { [address]: 23 }
 
-
+  function throwInSecondContract() {
+    _secondContract.thisThrowsARevert();
+  }
 }
