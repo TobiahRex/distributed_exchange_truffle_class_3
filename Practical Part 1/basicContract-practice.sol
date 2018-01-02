@@ -49,4 +49,22 @@ contract TestRevertAssert {
   function callSecondContract() payable {
     _secondContract.call.gas(100000).value(msg.value)(msg.data);
   }
+
+  function sendFundsToSecondContract() payable {
+    _secondContract.send(msg.value);
+  }
+
+  function getNumber() constant return(uint) {
+    return _secondContract.number();
+  }
+
+  function changeWithoutRever() {
+    _secondContract.increaseNumber();
+  }
+
+  function depositFunds() payable {
+    uint new_balance = msg.value;
+    require(balance[msg.sender] + msg.value >= balance[msg.sender]);
+    balance[msg.sender] += new_balance;
+  }
 }
