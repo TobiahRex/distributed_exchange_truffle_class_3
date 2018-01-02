@@ -34,5 +34,16 @@ contract TestRevertAssert {
     _secondContract.transfer(msg.value);
   }
 
+  function changeWithRever() {
+    _secondContract.increaseNumber();
+    revert();
+  }
+
+  function safeWithdraw(uint amount) {
+    require(balance[msg.sender] >= amount);
+    require(balance[msg.sender] - amount <= balance[msg.sender]);
+    balance[msg.sender] -= amount;
+    msg.sender.transfer(amount);
+  }
 
 }
