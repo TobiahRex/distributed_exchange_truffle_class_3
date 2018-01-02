@@ -7,7 +7,7 @@ contract secondContract {
     number += 1;
   }
 
-  function thisThrowsARever() {
+  function thisThrowsARevert() {
     rever();
   }
 
@@ -29,4 +29,10 @@ contract TestRevertAssert {
   function throwInSecondContract() {
     _secondContract.thisThrowsARevert();
   }
+
+  function callSecondContractWithTransfer() payable {
+    _secondContract.transfer(msg.value);
+  }
+
+
 }
